@@ -17,7 +17,7 @@ function New (props) {
         <textarea name='entry' required></textarea>
         <br />
 
-        <input type='checkbox' name='shipIsBroken' required /> Ship is broken
+        <input type='checkbox' name='shipIsBroken' /> Ship is broken
         <br />
 
         <input type='submit' value='Submit' />
