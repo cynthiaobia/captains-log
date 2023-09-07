@@ -28,13 +28,29 @@ app.get('/', (req, res) => {
   res.send(`App is working, <a href='/logs'>view all logs</a>`);
 })
 
-app.get('/logs', (req, res) => {
-  res.send(`All logs, <a href='/logs/new'>create a new log</a>`);
+// index route
+app.get('/logs', async (req, res) => {
+
+  const logsFromDB = await Log.find({});
+  // console.log(logsFromDB);
+  res.render('Index', {
+    logs: logsFromDB
+  });
 })
 
 
 app.get('/logs/new', (req, res) => {
   res.render('New');
+})
+
+// show route
+app.get('/logs/:id', async (req, res) => {
+
+  const {id} = req.params;
+  const log = await Log.findById(id);
+  res.render('Show', {
+    log: log
+  });
 })
 
 
@@ -45,14 +61,14 @@ app.post('/logs', async (req, res) => {
   req.body.shipIsBroken === 'on' ? req.body.shipIsBroken = true : req.body.shipIsBroken = false;
   
   try {
-    await Log.create(req.body);
+    const log = await Log.create(req.body);
+    res.redirect(`/logs/${log._id}`);
   } catch (e) {
     console.log(e);
   }
 
   console.log(req.body);
   // res.send(req.body);
-  res.redirect('/logs');
 
 })
 
