@@ -4,6 +4,7 @@ const app = express();
 const jsxEngine = require('jsx-view-engine'); 
 require('dotenv').config();
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
 // import logs data and schema
 const Log = require('./models/logs');
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
   next();
 })
 app.use(express.urlencoded({extended:false}));
+app.use(methodOverride('_method'));
 
 // ROUTES
 
