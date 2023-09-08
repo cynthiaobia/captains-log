@@ -86,6 +86,29 @@ app.delete('/logs/:id', async (req, res) => {
   }
 })
 
+// edit and update
+app.get('/logs/:id/edit', async (req, res) => {
+  const {id} = req.params;
+  console.log(req.body);
+  try {
+    const log = await Log.findById(id);
+    res.render('Edit', {log})
+  } catch (e) {
+    console.log(e);
+  }
+})
+
+app.put('/logs/:id', async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    const updatedLog = await Log.findByIdAndUpdate(id, req.body, {new: true});
+    res.redirect('/logs')
+  } catch (e) {
+    console.log(e);
+  }
+})
+
 
 /**
  * Seed Route

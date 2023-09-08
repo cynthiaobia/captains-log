@@ -23,6 +23,7 @@ function Index(props) {
               return (
                 <li key={i}>
                   <a href={`/logs/${log._id}`}>{log.title}</a>
+                  <a href={`/logs/${log._id}/edit`}>Edit</a>
                   <form method="POST" action={`/logs/${log._id}?_method=DELETE`}>
                     <input type='submit' value='Delete'/>
                   </form>
