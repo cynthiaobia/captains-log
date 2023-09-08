@@ -74,6 +74,18 @@ app.post('/logs', async (req, res) => {
 
 })
 
+// delete route
+app.delete('/logs/:id', async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    await Log.findByIdAndDelete(id);
+    res.redirect('/logs');
+  } catch (e) {
+    console.log(e);
+  }
+})
+
 
 /**
  * Seed Route

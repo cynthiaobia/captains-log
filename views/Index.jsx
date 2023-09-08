@@ -21,7 +21,12 @@ function Index(props) {
           logs.map(
             (log, i) => {
               return (
-                <li><a href={`/logs/${log._id}`}>{log.title}</a></li>
+                <li key={i}>
+                  <a href={`/logs/${log._id}`}>{log.title}</a>
+                  <form method="POST" action={`/logs/${log._id}?_method=DELETE`}>
+                    <input type='submit' value='Delete'/>
+                  </form>
+                </li>
               )
             })
         }
@@ -30,5 +35,7 @@ function Index(props) {
     </div>
   )
 }
+
+
 
 module.exports = Index;
